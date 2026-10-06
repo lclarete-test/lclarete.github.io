@@ -18,6 +18,9 @@
     @media(max-width:800px){.topbar nav{display:none}.hero{padding-top:48px}.ecosystem{min-height:auto;padding:250px 16px 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}.ecosystem:before,.ecosystem:after{display:none}.center{top:125px}.orbit{position:static;width:auto;min-height:125px}.orbit:hover,.orbit.active{transform:none}.project-grid{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:12px}}
     @media(max-width:520px){.shell{padding:0 16px}.ecosystem{grid-template-columns:1fr;padding-top:240px}.hero h1{letter-spacing:-1.5px}.footer .shell{display:block}.footer span{display:block;margin-top:8px}}
   </style>
+<style>
+@media(min-width:801px){.o5{left:50%;right:auto;transform:translateX(-50%)}.o5:hover,.o5.active{transform:translate(-50%,-3px)}}
+</style>
 </head>
 <body>
   <header class="topbar"><div class="shell" style="width:100%;display:flex;align-items:center;justify-content:space-between"><a class="brand" href="#top">Livia Clarete · Research Portfolio</a><nav aria-label="Primary"><a href="./">Work home</a><a href="#map">Research areas</a><a href="#projects">Projects</a></nav></div></header>
@@ -26,31 +29,25 @@
     <section class="shell" id="map">
       <div class="ecosystem" aria-label="Healthcare research areas">
         <div class="center" aria-hidden="true"><div><div class="person"></div><strong>People</strong><span>at the center</span></div></div>
-        <button class="orbit o1 active" data-area="patient"><small>01 · People</small><strong>Patient Research</strong><span>Conditions, lived experience, treatment and patient perspective</span></button>
-        <button class="orbit o2" data-area="hcp"><small>02 · Care delivery</small><strong>HCP &amp; Healthcare Staff Research</strong><span>Clinical workflows, roles and decision making</span></button>
-        <button class="orbit o3" data-area="market"><small>03 · Context</small><strong>Market Intelligence</strong><span>Opportunity, access and healthcare landscapes</span></button>
-        <button class="orbit o4" data-area="competitive"><small>04 · Industry</small><strong>Competitive Intelligence</strong><span>Products, positioning and category dynamics</span></button>
-        <button class="orbit o5" data-area="ux"><small>05 · Experience</small><strong>Healthcare UX Research</strong><span>Usability, product experience and adoption</span></button>
-        <button class="orbit o6" data-area="analytics"><small>06 · Evidence</small><strong>Healthcare Data Analytics</strong><span>Behavior, outcomes and visual analysis</span></button>
+        <button class="orbit o1 active" data-area="hcp"><small>01 · Care delivery</small><strong>HCP &amp; Healthcare Staff Research</strong><span>Clinical workflows, roles and decision making</span></button>
+        <button class="orbit o2" data-area="market"><small>02 · Context</small><strong>Market Intelligence</strong><span>Opportunity, access and healthcare landscapes</span></button>
+        <button class="orbit o3" data-area="competitive"><small>03 · Industry</small><strong>Competitive Intelligence</strong><span>Products, positioning and category dynamics</span></button>
+        <button class="orbit o4" data-area="ux"><small>04 · Experience</small><strong>Healthcare UX Research</strong><span>Usability, product experience and adoption</span></button>
+        <button class="orbit o5" data-area="analytics"><small>05 · Evidence</small><strong>Healthcare Data Analytics</strong><span>Behavior, outcomes and visual analysis</span></button>
       </div>
     </section>
-    <section class="projects" id="projects"><div class="shell"><div class="section-head"><div><div class="filter-label" id="filter-label">Patient Research</div><h2>Projects</h2></div><p>Select a research area above to see the work associated with it.</p></div><div class="project-grid" id="project-grid"></div></div></section>
+    <section class="projects" id="projects"><div class="shell"><div class="section-head"><div><div class="filter-label" id="filter-label">HCP &amp; Healthcare Staff Research</div><h2>Projects</h2></div><p>Select a research area above to see the work associated with it.</p></div><div class="project-grid" id="project-grid"></div></div></section>
   </main>
   <footer class="footer"><div class="shell"><div>Livia Clarete · Healthcare Research</div><span>Portfolio in development</span></div></footer>
   <script>
     const areas={
-      patient:{label:'Patient Research',projects:[
-        {meta:'HAMA · Longitudinal monitoring',year:'Multi-year',title:'Asthma Patient Monitoring',text:'Ongoing research following patient experiences, symptoms, treatment, daily management and changes over time.'},
-        {meta:'Longitudinal monitoring',year:'Multi-phase',title:'Multiple Sclerosis Patient Monitoring',text:'Patient-centered monitoring of lived experience, treatment, support needs and changes across the condition journey.'},
-        {meta:'Netnography · Communication research',year:'2016',title:'Respiratory Allergy Patient Research',text:'Research on respiratory allergies, symptoms, triggers, treatment decisions, information needs and audience profiles.',url:'respiratory-allergy-research.html'}
-      ]},
       hcp:{label:'HCP & Healthcare Staff Research',projects:[]},market:{label:'Market Intelligence',projects:[]},competitive:{label:'Competitive Intelligence',projects:[]},ux:{label:'Healthcare UX Research',projects:[{meta:'Product development methodology',year:'Template',title:'Zero to one product development',text:'A research-led framework from opportunity discovery through MVP, beta, launch and continuous iteration.',url:'zero-to-one-product.html'}]},analytics:{label:'Healthcare Data Analytics',projects:[]}
     };
     const grid=document.getElementById('project-grid'),label=document.getElementById('filter-label');
     function projectCard(p){const body=`<div class="project-meta"><span>${p.meta}</span><span>${p.year}</span></div><h3>${p.title}</h3><p>${p.text}</p><span class="open">${p.url?'Open case study →':'Case study in development'}</span>`;return p.url?`<a class="project" href="${p.url}">${body}</a>`:`<article class="project pending">${body}</article>`}
     function show(key){const area=areas[key];label.textContent=area.label;document.querySelectorAll('.orbit').forEach(b=>b.classList.toggle('active',b.dataset.area===key));grid.innerHTML=area.projects.length?area.projects.map(projectCard).join(''):`<div class="empty">Projects in this area will be added here.</div>`;document.getElementById('projects').scrollIntoView({behavior:'smooth',block:'start'})}
     document.querySelectorAll('.orbit').forEach(b=>b.addEventListener('click',()=>show(b.dataset.area)));
-    function initial(){const area=areas.patient;label.textContent=area.label;grid.innerHTML=area.projects.map(projectCard).join('')}initial();
+    function initial(){const area=areas.hcp;label.textContent=area.label;grid.innerHTML='<div class="empty">Projects in this area will be added here.</div>'}initial();
   </script>
 </body>
 </html>
